@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:opencart/UI/MySplashScreen.dart';
 import 'package:opencart/UI/widgets/AboutUs.dart';
+import 'package:opencart/UI/widgets/ContactUs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'UI/widgets/MyWebView.dart';
@@ -95,7 +96,13 @@ class _MyHomePageState extends State<MyHomePage> {
               'http://zelina.itechdatahk.com/shoppingcart/upload/index.php?route=product/product&path=20_27&product_id=41'),
       MyWebView(
           url:
-              'http://zelina.itechdatahk.com/shoppingcart/upload/index.php?route=product/product&path=25_28&product_id=42')
+              'http://zelina.itechdatahk.com/shoppingcart/upload/index.php?route=product/product&path=25_28&product_id=42'),
+      ContactUs(
+          lang: isEng
+              ? 'eng'
+              : isSimpChinese
+                  ? 'simp'
+                  : 'trad')
     ];
   }
 
@@ -123,6 +130,12 @@ class _MyHomePageState extends State<MyHomePage> {
           isTradChinese = false;
       }
       _children[1] = AboutUs(
+          lang: isEng
+              ? 'eng'
+              : isSimpChinese
+                  ? 'simp'
+                  : 'trad');
+      _children[5] = ContactUs(
           lang: isEng
               ? 'eng'
               : isSimpChinese
@@ -204,12 +217,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         : '查看購物車'),
               ),
             ),
-            ListTile(
-              title: Text(isEng
-                  ? 'Contact us'
-                  : isSimpChinese
-                      ? '联系我们'
-                      : '聯繫我們'),
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+                onItemTapped(5);
+              },
+              child: ListTile(
+                title: Text(isEng
+                    ? 'Contact us'
+                    : isSimpChinese
+                        ? '联系我们'
+                        : '聯繫我們'),
+              ),
             ),
             ExpansionTile(
               title: Text(isEng
