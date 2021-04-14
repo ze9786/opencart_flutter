@@ -33,11 +33,12 @@ dependencies:
   splashscreen: ^1.3.5
   url_launcher: ^6.0.3
   flutter_launcher_icons: ^0.9.0
+  youtube_player_flutter: ^8.0.0
 
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "images/iTDHK_ALL_LOGO.png"
+  image_path: "images/itdhk_all_logo.png"
 
 dev_dependencies:
   flutter_test:
