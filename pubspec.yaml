@@ -32,6 +32,12 @@ dependencies:
   font_awesome_flutter: ^9.0.0
   splashscreen: ^1.3.5
   url_launcher: ^6.0.3
+  flutter_launcher_icons: ^0.9.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "images/iTDHK_ALL_LOGO.png"
 
 dev_dependencies:
   flutter_test:

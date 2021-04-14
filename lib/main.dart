@@ -60,29 +60,42 @@ class _MyHomePageState extends State<MyHomePage> {
   // final Completer<WebViewController> _controller =
   //     Completer<WebViewController>();
   int _currentTab = 0;
+
   void onItemTapped(int index) {
     setState(() {
       _currentTab = index;
     });
   }
 
-  final List<Widget> _children = [
-    MyWebView(url: "http://zelina.itechdatahk.com/shoppingcart/upload/"),
-    AboutUs(),
-    MyWebView(
-        url:
-            'http://zelina.itechdatahk.com/shoppingcart/upload/index.php?route=checkout/cart'),
-    MyWebView(
-        url:
-            'http://zelina.itechdatahk.com/shoppingcart/upload/index.php?route=product/product&path=20_27&product_id=41'),
-    MyWebView(
-        url:
-            'http://zelina.itechdatahk.com/shoppingcart/upload/index.php?route=product/product&path=25_28&product_id=42')
-  ];
+  bool isSimpChinese;
+  bool isTradChinese;
+  bool isEng;
+  List<Widget> _children;
 
-  bool isSimpChinese = false;
-  bool isTradChinese = false;
-  bool isEng = true;
+  @override
+  void initState() {
+    isSimpChinese = false;
+    isTradChinese = false;
+    isEng = true;
+    _children = [
+      MyWebView(url: "http://zelina.itechdatahk.com/shoppingcart/upload/"),
+      AboutUs(
+          lang: isEng
+              ? 'eng'
+              : isSimpChinese
+                  ? 'simp'
+                  : 'trad'),
+      MyWebView(
+          url:
+              'http://zelina.itechdatahk.com/shoppingcart/upload/index.php?route=checkout/cart'),
+      MyWebView(
+          url:
+              'http://zelina.itechdatahk.com/shoppingcart/upload/index.php?route=product/product&path=20_27&product_id=41'),
+      MyWebView(
+          url:
+              'http://zelina.itechdatahk.com/shoppingcart/upload/index.php?route=product/product&path=25_28&product_id=42')
+    ];
+  }
 
   void changeLanguage(String lang) {
     setState(() {
@@ -107,6 +120,12 @@ class _MyHomePageState extends State<MyHomePage> {
           isSimpChinese = false;
           isTradChinese = false;
       }
+      _children[1] = AboutUs(
+          lang: isEng
+              ? 'eng'
+              : isSimpChinese
+                  ? 'simp'
+                  : 'trad');
     });
   }
 
