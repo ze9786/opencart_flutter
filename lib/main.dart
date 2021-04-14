@@ -43,15 +43,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 const _facebookUrl = 'https://www.facebook.com/iTechDataLimited';
-const _instragramUrl = 'https://www.instagram.com/itechdatalimited/';
+const _instagramUrl = 'https://www.instagram.com/itechdatalimited/';
 const _whatsappUrl = 'https://api.whatsapp.com/send?phone=85263024604';
 
 void _launchFbURL() async => await canLaunch(_facebookUrl)
     ? await launch(_facebookUrl)
     : throw 'Could not launch $_facebookUrl';
-void _launchInstragramURL() async => await canLaunch(_instragramUrl)
-    ? await launch(_instragramUrl)
-    : throw 'Could not launch $_instragramUrl';
+void _launchInstagramURL() async => await canLaunch(_instagramUrl)
+    ? await launch(_instagramUrl)
+    : throw 'Could not launch $_instagramUrl';
 void _launchWhatsappURL() async => await canLaunch(_whatsappUrl)
     ? await launch(_whatsappUrl)
     : throw 'Could not launch $_whatsappUrl';
@@ -244,7 +244,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: 10,
                     ),
                     GestureDetector(
-                        onTap: _launchInstragramURL,
+                        onTap: _launchInstagramURL,
                         child: Icon(FontAwesomeIcons.instagram,
                             color: Colors.white))
                   ],
