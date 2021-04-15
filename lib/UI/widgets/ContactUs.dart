@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+
 class ContactUs extends StatefulWidget {
   ContactUs({Key key, this.lang});
   final String lang;
@@ -12,6 +15,43 @@ class _ContactUsState extends State<ContactUs> {
   String dropdownValueEng = 'Order';
   String dropdownValueTrad = '訂單';
   String dropdownValueSimp = '订单';
+  TextEditingController nameController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+  TextEditingController contentController = TextEditingController();
+
+  sendEmail(String name, String mobile, String enquiry, String content) async {
+    String username = "zelina.to.itdhk@gmail.com"; //Your Email;
+    String password = 'J7EQC?aP'; //Your Email's password;
+
+    // ignore: deprecated_member_use
+    final smtpServer = gmail(username, password);
+    // Creating the Gmail server
+
+    // Create our email message.
+    final message = Message()
+      ..from = Address(username)
+      ..recipients.add('Andrew@iTechDataHK.com') //recipent email
+      ..subject =
+          'Flutter App Contact Form Received @ ${DateTime.now()}' //subject of the email
+      ..text = 'Name: ' +
+          name +
+          "\nMobile: " +
+          mobile +
+          "\nEnquiry type: " +
+          enquiry +
+          "\ncontent: " +
+          content; //body of the email
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' +
+          sendReport.toString()); //print if the email is sent
+    } on MailerException catch (e) {
+      print('Message not sent. \n' +
+          e.toString()); //print if the email is not sent
+      // e.toString() will show why the email is not sending
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +73,7 @@ class _ContactUsState extends State<ContactUs> {
                 ),
                 Flexible(
                   child: TextFormField(
+                    controller: nameController,
                     // The validator receives the text that the user has entered.
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -59,6 +100,7 @@ class _ContactUsState extends State<ContactUs> {
                 ),
                 Flexible(
                   child: TextFormField(
+                    controller: mobileController,
                     // The validator receives the text that the user has entered.
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -162,16 +204,24 @@ class _ContactUsState extends State<ContactUs> {
                   width: 10,
                 ),
                 Flexible(
-                  child: TextFormField(
-                    maxLines: null,
-                    keyboardType: TextInputType.multiline,
-                    // The validator receives the text that the user has entered.
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter content';
-                      }
-                      return null;
-                    },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue),
+                    ),
+                    child: TextFormField(
+                      controller: contentController,
+                      decoration: InputDecoration(border: InputBorder.none),
+                      maxLines: 8,
+                      keyboardType: TextInputType.multiline,
+                      // The validator receives the text that the user has entered.
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter content';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -189,6 +239,13 @@ class _ContactUsState extends State<ContactUs> {
                       // the form is invalid.
                       if (_formKey.currentState.validate()) {
                         // Process data.
+                        var dropdownV = widget.lang == 'eng'
+                            ? dropdownValueEng
+                            : widget.lang == 'trad'
+                                ? dropdownValueTrad
+                                : dropdownValueSimp;
+                        sendEmail(nameController.text, mobileController.text,
+                            dropdownV, contentController.text);
                       }
                     },
                     child: Text(widget.lang == 'eng'
