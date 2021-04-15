@@ -46,7 +46,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 const _facebookUrl = 'https://www.facebook.com/iTechDataLimited';
-const _instagramUrl = 'https://www.instagram.com/itechdatalimited/';
+const _instagramUrl = 'Https://www.Instagram.com/iTechDataLimited';
 const _whatsappUrl = 'https://api.whatsapp.com/send?phone=85263024604';
 
 void _launchFbURL() async => await canLaunch(_facebookUrl)

@@ -191,7 +191,11 @@ class _ContactUsState extends State<ContactUs> {
                         // Process data.
                       }
                     },
-                    child: const Text('Submit'),
+                    child: Text(widget.lang == 'eng'
+                        ? 'Submit'
+                        : widget.lang == 'trad'
+                            ? '提交'
+                            : '提交'),
                   ),
                   SizedBox(
                     width: 10,
@@ -200,7 +204,11 @@ class _ContactUsState extends State<ContactUs> {
                     onPressed: () {
                       _formKey.currentState.reset();
                     },
-                    child: const Text('Reset'),
+                    child: Text(widget.lang == 'eng'
+                        ? 'Reset'
+                        : widget.lang == 'trad'
+                            ? '重設'
+                            : '重设'),
                   ),
                 ],
               ),
