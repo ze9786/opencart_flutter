@@ -239,6 +239,7 @@ class _ContactUsState extends State<ContactUs> {
                       // the form is invalid.
                       if (_formKey.currentState.validate()) {
                         // Process data.
+                        _formKey.currentState.reset();
                         var dropdownV = widget.lang == 'eng'
                             ? dropdownValueEng
                             : widget.lang == 'trad'
