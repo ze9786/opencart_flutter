@@ -30,7 +30,8 @@ class _ContactUsState extends State<ContactUs> {
     // Create our email message.
     final message = Message()
       ..from = Address(username)
-      ..recipients.add('Andrew@iTechDataHK.com') //recipent email
+      // ..recipients.add('Andrew@iTechDataHK.com') //recipent email
+      ..recipients.add('zelina.to@itechdatahk.com') //recipent email
       ..subject =
           'Flutter App Contact Form Received @ ${DateTime.now()}' //subject of the email
       ..text = 'Name: ' +
@@ -239,7 +240,6 @@ class _ContactUsState extends State<ContactUs> {
                       // the form is invalid.
                       if (_formKey.currentState.validate()) {
                         // Process data.
-                        _formKey.currentState.reset();
                         var dropdownV = widget.lang == 'eng'
                             ? dropdownValueEng
                             : widget.lang == 'trad'
@@ -247,6 +247,9 @@ class _ContactUsState extends State<ContactUs> {
                                 : dropdownValueSimp;
                         sendEmail(nameController.text, mobileController.text,
                             dropdownV, contentController.text);
+                        nameController.clear();
+                        mobileController.clear();
+                        contentController.clear();
                       }
                     },
                     child: Text(widget.lang == 'eng'
@@ -260,7 +263,9 @@ class _ContactUsState extends State<ContactUs> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      _formKey.currentState.reset();
+                      nameController.clear();
+                      mobileController.clear();
+                      contentController.clear();
                     },
                     child: Text(widget.lang == 'eng'
                         ? 'Reset'
